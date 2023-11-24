@@ -1,0 +1,5 @@
+requests
+openai
+dotenv
+langchain
+bs4
