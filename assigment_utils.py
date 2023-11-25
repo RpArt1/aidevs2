@@ -23,7 +23,7 @@ class AssigmentUtils:
         :param data: json data
         :return: response object
         """
-        headers = {"Authorization": "Bearer {}".format(Config.open_api_key)}
+        headers = {"Authorization": "Bearer {}".format(Config().aidevs_priv_key)}
 
         try:
             if method == 'POST':

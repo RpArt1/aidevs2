@@ -1,9 +1,10 @@
 from tasks.task_5_liar import LiarTask
 from tasks.task_6_inprompt import InpromptTask
-from tasks.task_7_embeding import EmbeddingTask
+from tasks.task_2_3_embeding import EmbeddingTask
 from tasks.zadanie2_moderation import ModerationTask
 from tasks.task_4_2_blogger import BloggerTask
 import logging
+from tasks.task_2_4_whisper import WhisperTask
 
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -18,6 +19,8 @@ def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: boo
             task = InpromptTask('inprompt', send_to_aidevs, mock)
         case "embedding":
             task = EmbeddingTask('embedding', send_to_aidevs, mock)
+        case "whisper":
+            task = WhisperTask('whisper', send_to_aidevs, mock)
         case _:
             print(f"No task found of that signature: [{task_signature}] => EXITING")
             return
@@ -39,5 +42,5 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process("embedding", True, True)
+    create_task_and_process("whisper", False, True)
     logging.info("###### closing program ########\n\n\n")
