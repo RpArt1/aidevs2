@@ -6,3 +6,4 @@ venv.bck/*
 **/*init*
 .vscode/*
 various/*
+**/.env
