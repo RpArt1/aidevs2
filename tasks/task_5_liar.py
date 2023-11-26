@@ -3,7 +3,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage
 
 from tasks.abstractTask import AbstractTask
-from assigment_utils import AssigmentUtils
+from utils.assigment_utils import AssigmentUtils
 
 
 class LiarTask(AbstractTask):

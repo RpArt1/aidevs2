@@ -1,6 +1,6 @@
 import dotenv
 
-from assigment_utils import AssigmentUtils
+from utils.assigment_utils import AssigmentUtils
 import openai
 from dotenv import load_dotenv
 

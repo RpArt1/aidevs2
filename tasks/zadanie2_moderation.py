@@ -1,6 +1,6 @@
 import json
 
-from assigment_utils import AssigmentUtils
+from utils.assigment_utils import AssigmentUtils
 from tasks.abstractTask import AbstractTask
 
 

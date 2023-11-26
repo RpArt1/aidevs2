@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from assigment_utils import AssigmentUtils
+from utils.assigment_utils import AssigmentUtils
 import logging
 
 class AbstractTask(ABC):

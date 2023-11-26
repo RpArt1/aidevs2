@@ -5,3 +5,4 @@ venv/*
 venv.bck/*
 **/*init*
 .vscode/*
+various/*
