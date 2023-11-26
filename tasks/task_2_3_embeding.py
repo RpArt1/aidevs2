@@ -1,8 +1,5 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.schema import SystemMessage, HumanMessage
 from tasks.abstractTask import AbstractTask
 import logging
-import tiktoken
 
 class EmbeddingTask(AbstractTask):
     GPT_MODEL = "text-embedding-ada-002"
