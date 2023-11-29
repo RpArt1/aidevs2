@@ -6,6 +6,7 @@ from tasks.task_4_2_blogger import BloggerTask
 import logging
 from tasks.task_2_4_whisper import WhisperTask
 from tasks.task_2_5_functions import FunctionsTask
+from tasks.task_3_1_rodo import RodoTask
 import logging
 from enum import Enum
 
@@ -17,29 +18,27 @@ class TasksNames(Enum):
     EMBEDDING = "embedding",
     WHISPER = "whisper",
     FUNCTIONS = "functions"
+    RODO = "rodo"
+
+TASKS_MAPPING = {
+    TasksNames.MODERATION.value: ModerationTask,
+    TasksNames.BLOGGER.value: BloggerTask,
+    TasksNames.LIAR.value: LiarTask,
+    TasksNames.INPROMPT.value: InpromptTask,
+    TasksNames.EMBEDDING.value: EmbeddingTask,
+    TasksNames.WHISPER.value: WhisperTask,
+    TasksNames.FUNCTIONS.value: FunctionsTask,
+    TasksNames.RODO.value: RodoTask,
+}
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
-    match task_signature.lower():
-        case TasksNames.MODERATION.value:
-            task = ModerationTask(TasksNames.MODERATION.value, send_to_aidevs, mock)
-        case TasksNames.BLOGGER.value:
-            task = BloggerTask(TasksNames.BLOGGER.value, send_to_aidevs, mock)
-        case TasksNames.LIAR.value:
-            task = LiarTask(TasksNames.LIAR.value, send_to_aidevs, mock)
-        case TasksNames.INPROMPT.value:
-            task = InpromptTask(TasksNames.INPROMPT.value, send_to_aidevs, mock)
-        case TasksNames.EMBEDDING.value:
-            task = EmbeddingTask(TasksNames.EMBEDDING.value, send_to_aidevs, mock)
-        case TasksNames.WHISPER.value:
-            task = WhisperTask(TasksNames.WHISPER.value, send_to_aidevs, mock)
-        case TasksNames.FUNCTIONS.value:
-            task = FunctionsTask(TasksNames.FUNCTIONS.value, send_to_aidevs, mock)
-        case _:
-            print(f"No task found of that signature: [{task_signature}] => EXITING")
-            return
+    task_class = TASKS_MAPPING.get(task_signature.lower())
+    if task_class is None:
+        print(f"No task found of that signature: [{task_signature}] => EXITING")
+        return
+    task = task_class(task_signature, send_to_aidevs, mock)
     logging.debug(f"create_task_and_process, task with signature {task_signature} will be created and run")
     task.solve_task()
-
 
 def set_up_logging():
     # Configure the logging system
@@ -55,5 +54,5 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.FUNCTIONS.value, False, False)
+    create_task_and_process(TasksNames.RODO.value, False, False)
     logging.info("###### closing program ########\n\n\n")
