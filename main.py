@@ -54,5 +54,5 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.RODO.value, False, False)
+    create_task_and_process(TasksNames.RODO.value, True, False)
     logging.info("###### closing program ########\n\n\n")
