@@ -7,3 +7,4 @@ venv.bck/*
 .vscode/*
 various/*
 **/.env
+jupyter-notebooks/various/vector_store_db/*
