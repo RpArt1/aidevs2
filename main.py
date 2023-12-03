@@ -8,6 +8,7 @@ from tasks.task_2_4_whisper import WhisperTask
 from tasks.task_2_5_functions import FunctionsTask
 from tasks.task_3_1_rodo import RodoTask
 from tasks.task_3_2_scrapper import ScrapperTask
+from tasks.task_3_3_whoami import WhoamiTask
 import logging
 from enum import Enum
 
@@ -20,7 +21,8 @@ class TasksNames(Enum):
     WHISPER = "whisper",
     FUNCTIONS = "functions"
     RODO = "rodo",
-    SCRAPPER = "scraper"
+    SCRAPPER = "scraper",
+    WHOAMI = "whoami"
 
 TASKS_MAPPING = {
     TasksNames.MODERATION.value: ModerationTask,
@@ -31,7 +33,8 @@ TASKS_MAPPING = {
     TasksNames.WHISPER.value: WhisperTask,
     TasksNames.FUNCTIONS.value: FunctionsTask,
     TasksNames.RODO.value: RodoTask,
-    TasksNames.SCRAPPER.value: ScrapperTask
+    TasksNames.SCRAPPER.value: ScrapperTask,
+    TasksNames.WHOAMI.value: WhoamiTask
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -57,5 +60,5 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.SCRAPPER.value, True, False)
+    create_task_and_process(TasksNames.WHOAMI.value, True, False)
     logging.info("###### closing program ########\n\n\n")
