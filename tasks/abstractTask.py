@@ -32,7 +32,7 @@ class AbstractTask(ABC):
             Get task details from aidev and set it as class variable
         """
         assignment_body = AssigmentUtils.get_assigment(self.key)
-        logging.debug(f'assignment body: {assignment_body}')
+        logging.info(f'assignment body: {assignment_body}')
         self.assignment_body = assignment_body
 
     def return_answer(self):
