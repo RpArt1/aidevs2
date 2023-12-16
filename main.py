@@ -9,10 +9,11 @@ from tasks.task_3_1_rodo import RodoTask
 from tasks.task_3_2_scrapper import ScrapperTask
 from tasks.task_3_3_whoami import WhoamiTask
 from tasks.task_3_4_search import SearchTask
-
-import logging
-import logging
+from tasks.task_3_5_people import PeopleTask
 from enum import Enum
+import logging
+from colorlog import ColoredFormatter
+
 
 class TasksNames(Enum):
     MODERATION = "moderation",
@@ -25,7 +26,8 @@ class TasksNames(Enum):
     RODO = "rodo",
     SCRAPPER = "scraper",
     WHOAMI = "whoami",
-    SEARCH = "search"
+    SEARCH = "search",
+    PEOPLE = "people"
 
 TASKS_MAPPING = {
     TasksNames.MODERATION.value: ModerationTask,
@@ -38,7 +40,8 @@ TASKS_MAPPING = {
     TasksNames.RODO.value: RodoTask,
     TasksNames.SCRAPPER.value: ScrapperTask,
     TasksNames.WHOAMI.value: WhoamiTask,
-    TasksNames.SEARCH.value: SearchTask
+    TasksNames.SEARCH.value: SearchTask,
+    TasksNames.PEOPLE.value: PeopleTask
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -50,19 +53,15 @@ def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: boo
     logging.debug(f"create_task_and_process, task with signature {task_signature} will be created and run")
     task.solve_task()
 
-def set_up_logging():
-    # Configure the logging system
+def set_up_logging():    
+    
+    ### use like this:  tail -f /var/log/aidevs/aidevs.log | ccze to have colors in terminal
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(module)s.%(funcName)s -  %(message)s',
-        handlers=[
-            logging.FileHandler('/var/log/aidevs/aidevs.log'),  # Save logs to a file
-            logging.StreamHandler()  # Print logs to the console
-        ]
+        filename = '/var/log/aidevs/aidevs.log'
     )
-
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.SEARCH.value, True, False)
-    logging.info("###### closing program ########\n\n\n")
+    create_task_and_process(TasksNames.PEOPLE.value, True, False)

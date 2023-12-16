@@ -13,7 +13,7 @@ class AbstractTask(ABC):
         self.key = AssigmentUtils.get_key_for_assigment(self.task_name)
         self.send_to_aidevs = send_to_aidevs
         self.mock = mock
-        logging.info(f"Task created: {self.task_name} key for assignment {self.key}")
+        logging.debug(f"Task created: {self.task_name} key for assignment {self.key}")
 
     @abstractmethod
     def process_task_details(self):
