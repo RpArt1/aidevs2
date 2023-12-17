@@ -10,6 +10,7 @@ from tasks.task_3_2_scrapper import ScrapperTask
 from tasks.task_3_3_whoami import WhoamiTask
 from tasks.task_3_4_search import SearchTask
 from tasks.task_3_5_people import PeopleTask
+from tasks.task_4_1_knowledge import KnowledgeTask
 from enum import Enum
 import logging
 from colorlog import ColoredFormatter
@@ -27,7 +28,8 @@ class TasksNames(Enum):
     SCRAPPER = "scraper",
     WHOAMI = "whoami",
     SEARCH = "search",
-    PEOPLE = "people"
+    PEOPLE = "people",
+    KNOWLEDGE = "knowledge"
 
 TASKS_MAPPING = {
     TasksNames.MODERATION.value: ModerationTask,
@@ -41,7 +43,8 @@ TASKS_MAPPING = {
     TasksNames.SCRAPPER.value: ScrapperTask,
     TasksNames.WHOAMI.value: WhoamiTask,
     TasksNames.SEARCH.value: SearchTask,
-    TasksNames.PEOPLE.value: PeopleTask
+    TasksNames.PEOPLE.value: PeopleTask,
+    TasksNames.KNOWLEDGE.value: KnowledgeTask
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -54,7 +57,6 @@ def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: boo
     task.solve_task()
 
 def set_up_logging():    
-    
     ### use like this:  tail -f /var/log/aidevs/aidevs.log | ccze to have colors in terminal
     logging.basicConfig(
         level=logging.INFO,
@@ -64,4 +66,4 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.PEOPLE.value, True, False)
+    create_task_and_process(TasksNames.KNOWLEDGE.value, False, False)
