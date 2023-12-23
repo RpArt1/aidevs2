@@ -11,6 +11,7 @@ from tasks.task_3_3_whoami import WhoamiTask
 from tasks.task_3_4_search import SearchTask
 from tasks.task_3_5_people import PeopleTask
 from tasks.task_4_1_knowledge import KnowledgeTask
+from tasks.task_4_2_tools import ToolsTask
 from enum import Enum
 import logging
 from colorlog import ColoredFormatter
@@ -29,7 +30,9 @@ class TasksNames(Enum):
     WHOAMI = "whoami",
     SEARCH = "search",
     PEOPLE = "people",
-    KNOWLEDGE = "knowledge"
+    KNOWLEDGE = "knowledge",
+    TOOLS = "tools"
+    
 
 TASKS_MAPPING = {
     TasksNames.MODERATION.value: ModerationTask,
@@ -44,7 +47,8 @@ TASKS_MAPPING = {
     TasksNames.WHOAMI.value: WhoamiTask,
     TasksNames.SEARCH.value: SearchTask,
     TasksNames.PEOPLE.value: PeopleTask,
-    TasksNames.KNOWLEDGE.value: KnowledgeTask
+    TasksNames.KNOWLEDGE.value: KnowledgeTask,
+    TasksNames.TOOLS.value: ToolsTask
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -66,4 +70,4 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.KNOWLEDGE.value, False, False)
+    create_task_and_process(TasksNames.TOOLS.value, False, True)
