@@ -14,7 +14,7 @@ from tasks.task_4_1_knowledge import KnowledgeTask
 from tasks.task_4_2_tools import ToolsTask
 from enum import Enum
 import logging
-from colorlog import ColoredFormatter
+import traceback
 
 
 class TasksNames(Enum):
@@ -60,13 +60,29 @@ def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: boo
     logging.debug(f"create_task_and_process, task with signature {task_signature} will be created and run")
     task.solve_task()
 
-def set_up_logging():    
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(levelname)s - %(module)s.%(funcName)s -  %(message)s',
-        filename = '/var/log/aidevs/aidevs.log'
-    )
+
+
+    
+# instantiate logger
+#logger = logging.getLogger(__name__)
+logger = logging.getLogger()
+
+logger.setLevel(logging.INFO)
+# define handler and formatter
+handler = logging.FileHandler('/var/log/aidevs/aidevs.log')
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(message)s")
+# add formatter to handler
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.propagate = False
+    
+    
 
 if __name__ == "__main__":
-    set_up_logging()
-    create_task_and_process(TasksNames.TOOLS.value, True, False)
+    logger.info("Starting program")
+    try:
+        create_task_and_process(TasksNames.TOOLS.value, False, True)
+    except BaseException as e:
+        logger.error(f'Unknown error:  {str(e)}')
+        logger.error(f'Error details:  {traceback.format_exc()}')
+    logger.info("Ending program")

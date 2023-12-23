@@ -10,6 +10,9 @@ class ToolsTask(AbstractTask):
     def __init__(self, task_signature: str, send_to_aidevs: bool, mock: bool):
         super().__init__(task_signature, send_to_aidevs, mock)
         self.OPEN_AI_CLINET = OpenAI()
+        self.logger = logging.getLogger(__name__)
+        self.logger.warning("test warning")
+        self.logger.warning("test error")
 
     
     def solve_task(self):
@@ -51,20 +54,24 @@ class ToolsTask(AbstractTask):
         
         #debug question 
         #question = "Pojutrze mam kupić 1kg ziemniaków"
-        response = self.OPEN_AI_CLINET.chat.completions.create(
-            model="gpt-4",
-            temperature=0,
-            messages=[
-            {"role": "user", "content": question},
-            ],
-            functions=function_list,
-        )
-        
-        function_call = response.choices[0].message.function_call
+        if (self.mock):
+            self.logger.info(f"Mock mode - question clasifed as general: {question}")
+            function_call = None
+        else:    
+            response = self.OPEN_AI_CLINET.chat.completions.create(
+                model="gpt-4",
+                temperature=0,
+                messages=[
+                {"role": "user", "content": question},
+                ],
+                functions=function_list,
+            )
+            function_call = response.choices[0].message.function_call
+            
         if (function_call != None):
             function_call_name = function_call.name 
-            logging.info(f"Function choosen: {function_call_name}, response: {function_call.arguments} for question: {question}")
+            self.logger.info(f"Function choosen: {function_call_name}, response: {function_call.arguments} for question: {question}")
             return  json.loads(function_call.arguments)
         else: 
-            logging.info(f"No function choosen - question clasifed as general: {question}")
+            self.logger.info(f"No function choosen - question clasifed as general: {question}")
             return None
