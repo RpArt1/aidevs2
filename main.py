@@ -2,7 +2,7 @@ from tasks.task_5_liar import LiarTask
 from tasks.task_6_inprompt import InpromptTask
 from tasks.task_2_3_embeding import EmbeddingTask
 from tasks.zadanie2_moderation import ModerationTask
-from tasks.task_4_2_blogger import BloggerTask
+from tasks.task_1_4_blogger import BloggerTask
 from tasks.task_2_4_whisper import WhisperTask
 from tasks.task_2_5_functions import FunctionsTask
 from tasks.task_3_1_rodo import RodoTask
@@ -61,7 +61,6 @@ def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: boo
     task.solve_task()
 
 def set_up_logging():    
-    ### use like this:  tail -f /var/log/aidevs/aidevs.log | ccze to have colors in terminal
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(levelname)s - %(module)s.%(funcName)s -  %(message)s',
@@ -70,4 +69,4 @@ def set_up_logging():
 
 if __name__ == "__main__":
     set_up_logging()
-    create_task_and_process(TasksNames.TOOLS.value, False, True)
+    create_task_and_process(TasksNames.TOOLS.value, True, False)
