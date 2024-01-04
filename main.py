@@ -11,10 +11,12 @@ from tasks.task_3_3_whoami import WhoamiTask
 from tasks.task_3_4_search import SearchTask
 from tasks.task_3_5_people import PeopleTask
 from tasks.task_4_1_knowledge import KnowledgeTask
-from tasks.task_4_2_tools import ToolsTask
+from tasks.task_4_2_tools import ToolsTask  
+from tasks.task_4_3_gnome import GnomeTask
 from enum import Enum
 import logging
 import traceback
+import os
 
 
 class TasksNames(Enum):
@@ -31,7 +33,8 @@ class TasksNames(Enum):
     SEARCH = "search",
     PEOPLE = "people",
     KNOWLEDGE = "knowledge",
-    TOOLS = "tools"
+    TOOLS = "tools",
+    GNOME = "gnome"
     
 
 TASKS_MAPPING = {
@@ -48,7 +51,8 @@ TASKS_MAPPING = {
     TasksNames.SEARCH.value: SearchTask,
     TasksNames.PEOPLE.value: PeopleTask,
     TasksNames.KNOWLEDGE.value: KnowledgeTask,
-    TasksNames.TOOLS.value: ToolsTask
+    TasksNames.TOOLS.value: ToolsTask,
+    TasksNames.GNOME.value: GnomeTask
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -59,8 +63,6 @@ def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: boo
     task = task_class(task_signature, send_to_aidevs, mock)
     logging.debug(f"create_task_and_process, task with signature {task_signature} will be created and run")
     task.solve_task()
-
-
 
     
 # instantiate logger
@@ -81,8 +83,11 @@ logger.propagate = False
 if __name__ == "__main__":
     logger.info("Starting program")
     try:
-        create_task_and_process(TasksNames.TOOLS.value, False, True)
+        create_task_and_process(TasksNames.GNOME.value, True, False)
     except BaseException as e:
         logger.error(f'Unknown error:  {str(e)}')
         logger.error(f'Error details:  {traceback.format_exc()}')
+        logger.error("Ending program with error")
+        exit(1)
+
     logger.info("Ending program")

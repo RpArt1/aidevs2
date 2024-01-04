@@ -11,8 +11,6 @@ class ToolsTask(AbstractTask):
         super().__init__(task_signature, send_to_aidevs, mock)
         self.OPEN_AI_CLINET = OpenAI()
         self.logger = logging.getLogger(__name__)
-        self.logger.warning("test warning")
-        self.logger.warning("test error")
 
     
     def solve_task(self):
