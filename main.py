@@ -13,6 +13,8 @@ from tasks.task_3_5_people import PeopleTask
 from tasks.task_4_1_knowledge import KnowledgeTask
 from tasks.task_4_2_tools import ToolsTask  
 from tasks.task_4_3_gnome import GnomeTask
+from tasks.task_4_4_ownapi import OwnApiTask
+
 from enum import Enum
 import logging
 import traceback
@@ -34,8 +36,8 @@ class TasksNames(Enum):
     PEOPLE = "people",
     KNOWLEDGE = "knowledge",
     TOOLS = "tools",
-    GNOME = "gnome"
-    
+    GNOME = "gnome",
+    OWNAPI = "ownapi"
 
 TASKS_MAPPING = {
     TasksNames.MODERATION.value: ModerationTask,
@@ -52,7 +54,8 @@ TASKS_MAPPING = {
     TasksNames.PEOPLE.value: PeopleTask,
     TasksNames.KNOWLEDGE.value: KnowledgeTask,
     TasksNames.TOOLS.value: ToolsTask,
-    TasksNames.GNOME.value: GnomeTask
+    TasksNames.GNOME.value: GnomeTask,
+    TasksNames.OWNAPI.value: OwnApiTask
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -83,7 +86,7 @@ logger.propagate = False
 if __name__ == "__main__":
     logger.info("Starting program")
     try:
-        create_task_and_process(TasksNames.GNOME.value, True, False)
+        create_task_and_process(TasksNames.OWNAPI.value, True, False)
     except BaseException as e:
         logger.error(f'Unknown error:  {str(e)}')
         logger.error(f'Error details:  {traceback.format_exc()}')
