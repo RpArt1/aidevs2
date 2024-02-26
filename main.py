@@ -14,6 +14,8 @@ from tasks.task_4_1_knowledge import KnowledgeTask
 from tasks.task_4_2_tools import ToolsTask  
 from tasks.task_4_3_gnome import GnomeTask
 from tasks.task_4_4_ownapi import OwnApiTask
+from tasks.task_4_4_ownapi_pro import OwnApiProTask
+
 
 from enum import Enum
 import logging
@@ -38,6 +40,7 @@ class TasksNames(Enum):
     TOOLS = "tools",
     GNOME = "gnome",
     OWNAPI = "ownapi"
+    OWNAPIPRO = "ownapipro"
 
 TASKS_MAPPING = {
     TasksNames.MODERATION.value: ModerationTask,
@@ -55,7 +58,9 @@ TASKS_MAPPING = {
     TasksNames.KNOWLEDGE.value: KnowledgeTask,
     TasksNames.TOOLS.value: ToolsTask,
     TasksNames.GNOME.value: GnomeTask,
-    TasksNames.OWNAPI.value: OwnApiTask
+    TasksNames.OWNAPI.value: OwnApiTask,
+    TasksNames.OWNAPIPRO.value: OwnApiProTask
+
 }
 
 def create_task_and_process(task_signature: str, send_to_aidevs: bool, mock: bool):
@@ -86,7 +91,7 @@ logger.propagate = False
 if __name__ == "__main__":
     logger.info("Starting program")
     try:
-        create_task_and_process(TasksNames.OWNAPI.value, True, False)
+        create_task_and_process(TasksNames.OWNAPIPRO.value, True, False)
     except BaseException as e:
         logger.error(f'Unknown error:  {str(e)}')
         logger.error(f'Error details:  {traceback.format_exc()}')
